@@ -1,4 +1,4 @@
-;;; TeaCodeExpand.el --- Expansion of text by TeaCode program.
+;;; TeaCodeExpand.el --- Expansion of text by TeaCode program. -*- lexical-binding: t; -*-
 ;;; Copyright (C) 2018 Richard Guay
 
 ;;; Author: Richard Guay <raguay@customct.com>
@@ -24,8 +24,6 @@
 ;; program on the macOS machine. It is currently the bare bones
 ;; in terms of functionality.
 ;;
-;;; TeaCodeExpand.el -*- lexical-binding: t; -*-
-;;
 ;;; Code:
 
 (defun TeaCodeExpand ()
@@ -41,18 +39,22 @@
               " 'Application(\"TeaCode\").expandAsJson(\""
               (replace-regexp-in-string "\n$" "" (thing-at-point 'line t))
               "\" , { \"extension\": \""
-              (file-name-extension (buffer-file-name) t) "\" })'"))))
-    (let
-       ((tcjson (json-read-from-string ans)))
-       (let
-           ((txt (cdr (assoc 'text tcjson)))
-            (cursorp (cdr (assoc 'cursorPosition tcjson)))
-            (foundText (cdr (assoc 'foundPattern tcjson))))
-         (delete-region (line-beginning-position) (line-end-position))
-         (insert txt)
-         (backward-char (- (length txt) cursorp))
+              (file-name-extension (buffer-file-name) t)
+              "\" })'")
+             )
+            )
        )
-    )
+       (let
+          ((tcjson (json-read-from-string ans)))
+          (let
+              ((txt (cdr (assoc 'text tcjson)))
+               (cursorp (cdr (assoc 'cursorPosition tcjson)))
+               (foundText (cdr (assoc 'foundPattern tcjson))))
+              (delete-region (line-beginning-position) (line-end-position))
+              (insert txt)
+              (backward-char (- (length txt) cursorp))
+          )
+      )
   )
 )
 (global-set-key (kbd "A-C-e") 'TeaCodeExpand)
