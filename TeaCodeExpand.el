@@ -26,6 +26,7 @@
 ;;
 ;;; Code:
 
+(require 'json)
 (defun TeaCodeExpand ()
   "Expand the current line with TeaCode."
   (interactive)
