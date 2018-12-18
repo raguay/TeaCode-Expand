@@ -3,8 +3,10 @@
 
 ;;; Author: Richard Guay <raguay@customct.com>
 ;;; Keywords: lisp
+;;; URL: https://github.com/raguay/TeaCodeExpand
 ;;; Version: 0.0.1
-
+;;; Package-Requires: ((emacs "24.4"))
+;;;
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
@@ -27,38 +29,47 @@
 ;;; Code:
 
 (require 'json)
-(defun TeaCodeExpand ()
+
+(defun teacode-expand ()
   "Expand the current line with TeaCode."
   (interactive)
-  (let
-      ((ans (shell-command-to-string
-             (concat
-              "/usr/bin/osascript "
-              " -l "
-              " JavaScript "
-              " -e "
-              " 'Application(\"TeaCode\").expandAsJson(\""
-              (replace-regexp-in-string "\n$" "" (thing-at-point 'line t))
+  (let*
+      ;;;###autoload
+      ((filename (buffer-file-name))
+       (ext (if filename (file-name-extension filename t) "any language"))
+       (toExpand (concat
+              "Application(\"TeaCode\").expandAsJson(\""
+              (shell-quote-argument (replace-regexp-in-string "\n$" "" (thing-at-point 'line t)))
               "\" , { \"extension\": \""
-              (file-name-extension (buffer-file-name) t)
-              "\" })'")
-             )
-            )
-       )
-       (let
-          ((tcjson (json-read-from-string ans)))
-          (let
-              ((txt (cdr (assoc 'text tcjson)))
-               (cursorp (cdr (assoc 'cursorPosition tcjson)))
-               (foundText (cdr (assoc 'foundPattern tcjson))))
-              (delete-region (line-beginning-position) (line-end-position))
-              (insert txt)
-              (backward-char (- (length txt) cursorp))
-          )
-      )
-  )
-)
-(global-set-key (kbd "A-C-e") 'TeaCodeExpand)
+              ext
+              "\" })" ))
+       (ans (with-temp-buffer
+              (call-process
+              "osascript"
+              nil
+              (current-buffer)
+              nil
+              "-l"
+              "JavaScript"
+              "-e"
+              toExpand)
+             (buffer-string)))
+     (tcjson (json-read-from-string ans))
+     (txt (cdr (assoc 'text tcjson)))
+     (cursorp (cdr (assoc 'cursorPosition tcjson))))
+     ;;; The foundText variable is also in the structure, but I'm not
+     ;;; sure when to use it. Just comment it out for now until I understand
+     ;;; it's usability.
+     ;;;
+     ;;;(foundText (cdr (assoc 'foundPattern tcjson)))
+     (delete-region (line-beginning-position) (line-end-position))
+     (insert txt)
+     (backward-char (- (length txt) cursorp))))
 
-(provide 'TeaCodeExpand)
+;;;
+;;; To add a hotkey for this function, add this line to your config file.
+;;;
+;;;(global-set-key (kbd "A-C-e") 'teacode-expand)
+
+(provide 'teacode-expand)
 ;;; TeaCodeExpand.el ends here
