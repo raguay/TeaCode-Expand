@@ -71,6 +71,5 @@
     (insert txt)
     (backward-char (- (length txt) cursorp))))
 
-
 (provide 'teacode-expand)
 ;;; teacode-expand.el ends here
