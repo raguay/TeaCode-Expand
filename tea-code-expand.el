@@ -36,11 +36,11 @@
 
 (require 'json)
 
+;;;###autoload
 (defun teacode-expand ()
   "Expand the current line with TeaCode."
   (interactive)
   (let*
-      ;;;###autoload
       ((filename (buffer-file-name))
        (ext (if filename (file-name-extension filename t) "any language"))
        (toExpand (concat
