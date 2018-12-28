@@ -1,4 +1,4 @@
-;;; TeaCodeExpand.el --- Expansion of text by TeaCode program. -*- lexical-binding: t; -*-
+;;; tea-code-expand.el --- Expansion of text by TeaCode program. -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 Richard Guay
 
@@ -73,4 +73,4 @@
 
 
 (provide 'teacode-expand)
-;;; TeaCodeExpand.el ends here
+;;; tea-code-expand.el ends here
