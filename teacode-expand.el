@@ -1,10 +1,10 @@
-;;; tea-code-expand.el --- Expansion of text by TeaCode program. -*- lexical-binding: t; -*-
+;;; teacode-expand.el --- Expansion of text by TeaCode program. -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 Richard Guay
 
 ;; Author: Richard Guay <raguay@customct.com>
 ;; Keywords: lisp
-;; URL: https://github.com/raguay/TeaCodeExpand
+;; URL: https://github.com/raguay/TeaCode-Expand
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "24.4"))
 
@@ -41,8 +41,7 @@
   "Expand the current line with TeaCode."
   (interactive)
   (let*
-      ((filename (or (buffer-file-name)
-                     (user-error "This buffer is not visiting a file")))
+      ((filename (buffer-file-name))
        (ext (if filename (file-name-extension filename t) "any language"))
        (toExpand (concat
                   "Application(\"TeaCode\").expandAsJson(\""
@@ -74,4 +73,4 @@
 
 
 (provide 'teacode-expand)
-;;; tea-code-expand.el ends here
+;;; teacode-expand.el ends here
