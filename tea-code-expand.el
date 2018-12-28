@@ -41,7 +41,8 @@
   "Expand the current line with TeaCode."
   (interactive)
   (let*
-      ((filename (buffer-file-name))
+      ((filename (or (buffer-file-name)
+                     (user-error "This buffer is not visiting a file")))
        (ext (if filename (file-name-extension filename t) "any language"))
        (toExpand (concat
                   "Application(\"TeaCode\").expandAsJson(\""
