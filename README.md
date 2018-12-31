@@ -13,7 +13,7 @@ TeaCode requires the extension of the file to figure out the language for perfor
 
 The following are variables that can be set by the user to change functionality. For this package, you can change:
 
-###teacode-default-language
+### teacode-default-language
 
 This variable defaults to `any language` and is set to the extension for a buffer that isn't attached to a file. Therefore, if you usually use buffers for quick JavaScript code, you could set the variable to `.js`.
 
