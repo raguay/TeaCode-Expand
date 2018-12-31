@@ -3,7 +3,7 @@
 
 # TeaCode Expand
 
-An elisp package for expanding text in [TeaCode](https://www.apptorium.com/teacode) for macOS. Still a work in progress, but it is working on my system. 
+An elisp package for expanding text in [TeaCode](https://www.apptorium.com/teacode) for macOS. It has been working great for me. But, if you find and issue, please submit a [issue](https://github.com/raguay/TeaCode-Expand/issues).
 
 TeaCode is a text expander designed for programmers. It expands the text based on the programming language of the file used. It is very flexible and can be scripted as well.
 
