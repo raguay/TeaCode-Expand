@@ -1,3 +1,6 @@
+[![MELPA](https://melpa.org/packages/teacode-expand-badge.svg)](https://melpa.org/#/teacode-expand)
+
+
 # TeaCode Expand
 
 An elisp package for expanding text in [TeaCode](https://www.apptorium.com/teacode) for macOS. Still a work in progress, but it is working on my system. 
