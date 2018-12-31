@@ -36,13 +36,18 @@
 
 (require 'json)
 
+(defcustom teacode-default-language "any language"
+       "The default language to use when expanding a expression. Typically used when the buffer isn't attached to a file."
+       :type 'string
+       :require 'teacode-expand)
+
 ;;;###autoload
 (defun teacode-expand ()
   "Expand the current line with TeaCode."
   (interactive)
   (let*
       ((filename (buffer-file-name))
-       (ext (if filename (file-name-extension filename t) "any language"))
+       (ext (if filename (file-name-extension filename t) teacode-default-language))
        (toExpand (concat
                   "Application(\"TeaCode\").expandAsJson(\""
                   (shell-quote-argument (replace-regexp-in-string "\n$" "" (thing-at-point 'line t)))
