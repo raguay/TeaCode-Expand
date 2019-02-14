@@ -37,6 +37,35 @@ Go to the `~/.emacs.d` folder and run `make`. The new package will be downloaded
 
 If you want to change the default value of a package variable, you should do it in the `config.el` file in the `~/.doom.d` directory.
 
-## Adding to [Spacemac](http://spacemacs.org/)
+## Adding to [Spacemacs](http://spacemacs.org/)
 
-Coming soon...
+Type `SPC f e d` in Spacemacs or open your configuration: `~/.spacemacs` or `~/.spacemacs.d/init.el`
+Add `teacode-expand` to `dotspacemacs-additional-packages`
+
+```elisp
+dotspacemacs-additional-packages
+'(
+  teacode-expand
+ )
+```
+
+Then set the shortcut to your likings in `dotspacemacs/user-config`.
+This Example uses `Control + Alt + e`
+
+For `vim` mode:
+```elisp
+  (define-key evil-insert-state-map (kbd "C-M-e") 'teacode-expand)
+```
+
+For `hybrid` mode:
+```elisp
+  (define-key evil-hybrid-state-map (kbd "C-M-e") 'teacode-expand)
+```
+
+For `emacs` mode:
+```elisp
+  (define-key evil-emacs-state-map (kbd "C-M-e") 'teacode-expand)
+```
+
+To enable TeaCode only for specific file types you could `add-hook` for the `major mode` and enable the shortcut there.
+Another way would be to create a `teacode-mode` and add it to the `major modes`.
