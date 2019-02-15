@@ -37,7 +37,7 @@ Go to the `~/.emacs.d` folder and run `make`. The new package will be downloaded
 
 If you want to change the default value of a package variable, you should do it in the `config.el` file in the `~/.doom.d` directory.
 
-## Adding to [Spacemacs](http://spacemacs.org/)
+## Adding to [Spacemacs](http://spacemacs.org/) - Thanks to [Jan Dammshäuser](https://github.com/jandamm) for this information
 
 Type `SPC f e d` in Spacemacs or open your configuration: `~/.spacemacs` or `~/.spacemacs.d/init.el`
 Add `teacode-expand` to `dotspacemacs-additional-packages`
