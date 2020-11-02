@@ -22,7 +22,7 @@ This variable defaults to `any language` and is set to the extension for a buffe
 In the `~/.doom.d/packages.el` file, add this line:
 
 ```elisp
-(package! teacode-expand :recipe (:fetcher github
+(package! teacode-expand :recipe (:host github
                                  :repo "raguay/TeaCode-Expand"
                                  :files ("tokens" "teacode-expand.el")))
 ```
